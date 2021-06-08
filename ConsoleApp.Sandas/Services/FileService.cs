@@ -5,6 +5,7 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using ConsoleApp.Sandas.Services.Interfaces;
+using System.Text;
 
 namespace ConsoleApp.Sandas.Services
 {
@@ -47,10 +48,18 @@ namespace ConsoleApp.Sandas.Services
             }
             return groupAmounts.ToList();
         }
-        public List<Employee> WriteToCsvFile(List<Employee> employeesList)
+        public void WriteToCsvFile(List<Employee> employeesList)
         {
-            employeesList =
-            return;
+            var newRow = new StringBuilder();
+            
+            employeesList = ReturnTotalAmounts();
+            foreach (var employee in employeesList)
+            {
+                newRow.Append(employee);
+                Console.WriteLine($"{newRow}");
+            }
+            
+           
         }        
     }
 }
