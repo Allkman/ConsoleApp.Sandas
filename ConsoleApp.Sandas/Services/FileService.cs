@@ -3,13 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
-using CsvHelper;
 using System.Linq;
-using System.Reflection;
-using System.Globalization;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.SqlClient;
 using ConsoleApp.Sandas.Services.Interfaces;
 
 namespace ConsoleApp.Sandas.Services
@@ -17,20 +11,45 @@ namespace ConsoleApp.Sandas.Services
     //internal class only for ConsoleApp.Sandas project
     public class FileService : IFileService
     {
-        readonly string[] csvLines = File.ReadAllLines($"C:{Path.DirectorySeparatorChar}SandasTemp{Path.DirectorySeparatorChar}duomenys.csv");
-        List<string> compensationTypes = new List<string>();
-        public void ReadCsvFile()
+        readonly string filePath = $"C:{Path.DirectorySeparatorChar}SandasTemp{Path.DirectorySeparatorChar}duomenys.csv";
+        string newFilePath = $"C:{Path.DirectorySeparatorChar}SandasTemp{Path.DirectorySeparatorChar}newdata.csv";
+        
+        public List<Employee> ReadCsvFile()
         {
-            //spliting each for into a column data.  i=1 because i m skipping header in line 0
-            for (int i = 1; i < csvLines.Length; i++)
-            {
-                string[] rowData = csvLines[i].Split(',');
-                compensationTypes.Add(rowData[1]);
-            }
-            for (int i = 0; i < compensationTypes.Count; i++)
-            {
-                Console.WriteLine(compensationTypes[i]);
-            }
+            return File.ReadAllLines(filePath)
+                .Skip(1) // skipping 1st (Column Headers) row
+                .Where(row => row.Length > 0)
+                .Select(Employee.ParseRow).ToList();
         }        
+        private void PrintAllCsv() //this method is only for testing...
+        {
+            var allEmployees = ReadCsvFile();
+            foreach (var employee in allEmployees)
+            {
+                Console.WriteLine($"{employee.FullName} \t {employee.CompensationType} \t {employee.Amount}");
+            }
+        }
+        public void ReturnTotalAmounts()
+        {
+            var employeesList = ReadCsvFile();
+            var groupAmounts =
+                 from employee in employeesList
+                 group employee by employee.FullName into employeeGroup
+                 select new
+                 {
+                     FullName = employeeGroup.Key,
+                     TotalAmount = employeeGroup.Sum(x => x.Amount),
+                     Taxes = (employeeGroup.Sum(x => x.Amount)*1.4) - employeeGroup.Sum(x => x.Amount),
+                 };
+            foreach (var amount in groupAmounts)
+            {
+                Console.WriteLine($"{amount.FullName} {amount.TotalAmount} {amount.Taxes}");
+            }            
+        }
+        //public List<Employee> WriteToCsvFile()
+        //{
+
+        //    return;
+        //}        
     }
 }

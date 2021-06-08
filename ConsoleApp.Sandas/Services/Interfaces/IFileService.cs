@@ -1,13 +1,11 @@
-﻿using System;
+﻿using Sandas.Domain.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleApp.Sandas.Services.Interfaces
 {
     public interface IFileService
     {
-        void ReadCsvFile();
+        List<Employee> ReadCsvFile();
+        void ReturnTotalAmounts();
     }
 }
