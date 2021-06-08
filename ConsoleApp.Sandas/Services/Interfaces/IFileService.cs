@@ -5,7 +5,9 @@ namespace ConsoleApp.Sandas.Services.Interfaces
 {
     public interface IFileService
     {
+        List<Employee> ReturnByEmployeeAndCompensationType();
         List<Employee> ReturnTotalAmounts();
-        void WriteToCsvFile();
+        void WriteEmployeeAndCompensationToCsvFile();
+        void WriteTotalAmountsToCsvFile();
     }
 }
