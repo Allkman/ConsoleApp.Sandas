@@ -8,6 +8,6 @@ namespace ConsoleApp.Sandas.Services.Interfaces
 {
     public interface IFileService
     {
-        void ReadCsvFile();
+        void ReturnTotalAmounts();
     }
 }

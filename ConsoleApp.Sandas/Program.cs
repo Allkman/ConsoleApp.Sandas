@@ -17,13 +17,14 @@ namespace ConsoleApp.Sandas
     {
         static void Main(string[] args)
         {
-            //db inicializavimui
-            //var context = new ApplicationDbContext();
-            //context.Database.EnsureCreated();
-
             IFileService fileService = new FileService();
+            //fileService.PrintAllCsv(); //for testing
 
-            fileService.ReadCsvFile();
+            fileService.ReturnTotalAmounts();
+
+            Console.WriteLine();
+            Console.WriteLine("---= PRESS ANY KEY =---");
+            Console.ReadKey();
         }
     }
 }
