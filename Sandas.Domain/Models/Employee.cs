@@ -10,7 +10,6 @@ namespace Sandas.Domain.Models
         public int TotalAmount { get; set; }
         public double Taxes { get; set; }
 
-
         public static Employee ParseRow(string row)
         {
             var columns = row.Split(',');
@@ -20,6 +19,10 @@ namespace Sandas.Domain.Models
                 CompensationType = columns[1],
                 Amount = Convert.ToInt32(columns[2])
             };
+        }
+        public override string ToString()
+        {
+            return this.FullName.ToString() + "," + this.TotalAmount + "," + this.Taxes.ToString();
         }
     }
 }

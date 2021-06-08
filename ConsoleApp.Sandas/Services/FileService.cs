@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using ConsoleApp.Sandas.Services.Interfaces;
 using System.Text;
+using System.Reflection;
 
 namespace ConsoleApp.Sandas.Services
 {
@@ -47,19 +48,18 @@ namespace ConsoleApp.Sandas.Services
                 Console.WriteLine($"{amount.FullName};{amount.TotalAmount};{amount.Taxes}");
             }
             return groupAmounts.ToList();
-        }
-        public void WriteToCsvFile(List<Employee> employeesList)
-        {
-            var newRow = new StringBuilder();
-            
-            employeesList = ReturnTotalAmounts();
-            foreach (var employee in employeesList)
-            {
-                newRow.Append(employee);
-                Console.WriteLine($"{newRow}");
-            }
-            
-           
         }        
+        public void WriteToCsvFile()
+        {
+            var csvText = ReturnTotalAmounts();
+            var sb = new StringBuilder();
+            sb.AppendLine("FullName;TotalAmount;Taxes");
+            foreach (var item in csvText)
+            {
+                sb.AppendLine(item.ToString());
+            }
+            Console.WriteLine(sb.ToString());
+            File.WriteAllText(newFilePath, sb.ToString());
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace ConsoleApp.Sandas
             //fileService.PrintAllCsv(); //for testing
 
             fileService.ReturnTotalAmounts();
-
+            fileService.WriteToCsvFile();
             Console.WriteLine();
             Console.WriteLine("---= PRESS ANY KEY =---");
             Console.ReadKey();
