@@ -9,7 +9,7 @@ using ConsoleApp.Sandas.Services.Interfaces;
 namespace ConsoleApp.Sandas.Services
 {
     //internal class only for ConsoleApp.Sandas project
-    public class FileService : IFileService
+    class FileService : IFileService
     {
         readonly string filePath = $"C:{Path.DirectorySeparatorChar}SandasTemp{Path.DirectorySeparatorChar}duomenys.csv";
         string newFilePath = $"C:{Path.DirectorySeparatorChar}SandasTemp{Path.DirectorySeparatorChar}newdata.csv";
