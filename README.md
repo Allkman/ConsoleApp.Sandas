@@ -5,5 +5,7 @@
 ![Screenshot](SandasPNG.png)
 
 Above data in console window succesfully printed to csv file [newData.csv] 
+
 ![Screenshot](newData.png)
+
 - [ ] 2nd part of an assigment [ -in progress]
