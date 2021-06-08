@@ -26,16 +26,16 @@ namespace ConsoleApp.Sandas.Services
             var allEmployees = ReadCsvFile();
             foreach (var employee in allEmployees)
             {
-                Console.WriteLine($"{employee.FullName} \t {employee.CompensationType} \t {employee.Amount}");
+                Console.WriteLine($"{employee.FullName};{employee.CompensationType};{employee.Amount}");
             }
         }
-        public void ReturnTotalAmounts()
+        public List<Employee> ReturnTotalAmounts()
         {
             var employeesList = ReadCsvFile();
             var groupAmounts =
                  from employee in employeesList
                  group employee by employee.FullName into employeeGroup
-                 select new
+                 select new Employee
                  {
                      FullName = employeeGroup.Key,
                      TotalAmount = employeeGroup.Sum(x => x.Amount),
@@ -43,13 +43,14 @@ namespace ConsoleApp.Sandas.Services
                  };
             foreach (var amount in groupAmounts)
             {
-                Console.WriteLine($"{amount.FullName} {amount.TotalAmount} {amount.Taxes}");
+                Console.WriteLine($"{amount.FullName};{amount.TotalAmount};{amount.Taxes}");
             }
+            return groupAmounts.ToList();
         }
-        //public List<Employee> WriteToCsvFile()
-        //{
-
-        //    return;
-        //}        
+        public List<Employee> WriteToCsvFile(List<Employee> employeesList)
+        {
+            employeesList =
+            return;
+        }        
     }
 }

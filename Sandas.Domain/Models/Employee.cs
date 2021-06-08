@@ -13,6 +13,9 @@ namespace Sandas.Domain.Models
     {
         public string CompensationType { get; set; }
         public int Amount { get; set; }
+        public int TotalAmount { get; set; }
+        public double Taxes { get; set; }
+
 
         public static Employee ParseRow(string row)
         {
