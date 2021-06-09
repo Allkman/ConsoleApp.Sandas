@@ -2,7 +2,7 @@
 Assigments.
 Read / Write to CSV and manipulate with data.
 
-Initial Data: A CSV file that was parsed and manipulated.
+Initial Data: A CSV file that was parsed and givn data was used to perform assigned manipulation.
 
 ![Screenshot](InitialData.png)
 
