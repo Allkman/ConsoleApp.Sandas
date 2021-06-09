@@ -14,7 +14,7 @@ namespace ConsoleApp.Sandas.Services
     class FileService : IFileService
     {
         readonly string filePath = $"C:{Path.DirectorySeparatorChar}SandasTemp{Path.DirectorySeparatorChar}duomenys.csv";
-        string totalAmountsAndTaxesFilePath = $"C:{Path.DirectorySeparatorChar}SandasTemp{Path.DirectorySeparatorChar}totalAmounts.csv";
+        string totalAmountsAndTaxesFilePath = $"C:{Path.DirectorySeparatorChar}SandasTemp{Path.DirectorySeparatorChar}totalAmountsAndTaxes.csv";
         string employeeAndCompensationTypeFilePath = $"C:{Path.DirectorySeparatorChar}SandasTemp{Path.DirectorySeparatorChar}employeeAndCompensationType.csv";
 
         public List<Employee> ReadCsvFile()
@@ -72,26 +72,25 @@ namespace ConsoleApp.Sandas.Services
             }
             return groupByEmployeeAndCompensationType.ToList();
         }
-        public void WriteEmployeeAndCompensationToCsvFile()
+        public void WriteEmployeeAndCompensationTypeToCsvFile()
         {
-
+            var csvTextToFile = ReturnByEmployeeAndCompensationType();
             var sb = new StringBuilder();
             sb.AppendLine("FullName;CompensationType;TotalAmount");
-            var csvTextToFile = ReturnByEmployeeAndCompensationType();
-            foreach (var item in csvTextToFile)
+            foreach (var csvLine in csvTextToFile)
             {
-                sb.AppendLine(item.ToString());
+                sb.AppendJoin(",", csvLine.FullName, csvLine.CompensationType, csvLine.TotalAmount, "\n");                       
             }
             Console.WriteLine(sb.ToString());
             File.WriteAllText(employeeAndCompensationTypeFilePath, sb.ToString());
         }
-        private void PrintAllCsv() //this method was ment only for testing...
-        {
-            var allEmployees = ReadCsvFile();
-            foreach (var employee in allEmployees)
-            {
-                Console.WriteLine($"{employee.FullName};{employee.CompensationType};{employee.Amount}");
-            }
-        }
+        //public void PrintAllCsv() //this method was ment only for testing leaving it for future implementations...
+        //{
+        //    var allEmployees = ReadCsvFile();
+        //    foreach (var employee in allEmployees)
+        //    {
+        //        Console.WriteLine($"{employee.FullName};{employee.CompensationType};{employee.Amount}");
+        //    }
+        //}
     }
 }

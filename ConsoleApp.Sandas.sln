@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp.Sandas", "Consol
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sandas.Domain", "Sandas.Domain\Sandas.Domain.csproj", "{42E0714E-42A4-4830-9DBC-387D0595524D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AssignmentFiles", "AssignmentFiles", "{33CCFA01-277D-42DA-8FD7-955497057983}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

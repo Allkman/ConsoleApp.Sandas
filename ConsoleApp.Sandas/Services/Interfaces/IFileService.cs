@@ -3,11 +3,10 @@ using System.Collections.Generic;
 
 namespace ConsoleApp.Sandas.Services.Interfaces
 {
-    public interface IFileService
+    interface IFileService
     {
-        List<Employee> ReturnByEmployeeAndCompensationType();
-        List<Employee> ReturnTotalAmountsAndTaxes();
-        void WriteEmployeeAndCompensationToCsvFile();
         void WriteTotalAmountsAndTaxesToCsvFile();
+        void WriteEmployeeAndCompensationTypeToCsvFile();
+
     }
 }
