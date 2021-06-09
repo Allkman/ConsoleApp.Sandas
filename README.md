@@ -1,8 +1,11 @@
 # ConsoleApp.Sandas
 Assigments.
 Read / Write to CSV and manipulate with data.
-Initial Data:
+
+Initial Data: A CSV file that was parsed and manipulated.
+
 ![Screenshot](InitialData.png)
+
 - [x] 1st part of an assigment: - Calculate total amounts off all income and sort by FullName (OrderBy, was not intended)
 
 CSV file:
