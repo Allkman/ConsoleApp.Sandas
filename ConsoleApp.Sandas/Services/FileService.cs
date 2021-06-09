@@ -79,7 +79,7 @@ namespace ConsoleApp.Sandas.Services
             sb.AppendLine("FullName;CompensationType;TotalAmount");
             foreach (var csvLine in csvTextToFile)
             {
-                sb.AppendJoin(",", csvLine.FullName, csvLine.CompensationType, csvLine.TotalAmount, "\n");                       
+                sb.AppendJoin(";", csvLine.FullName, csvLine.CompensationType, csvLine.TotalAmount, "\n");                       
             }
             Console.WriteLine(sb.ToString());
             File.WriteAllText(employeeAndCompensationTypeFilePath, sb.ToString());
