@@ -10,14 +10,22 @@ namespace ConsoleApp.Sandas
         {
             IFileService fileService = new FileService();
             //fileService.PrintAllCsv(); //for testing
-
-            fileService.ReturnTotalAmounts();
-            Console.WriteLine("|--------------------Program.cs--------------------|");
-            fileService.WriteTotalAmountsToCsvFile();
-            Console.WriteLine("|--------------------Program.cs--------------------|");
+            Console.WriteLine("||--------1st PART--------||");
+            Console.WriteLine();
+            Console.WriteLine("|--------------------ReturnTotalAmountsAndTaxes();--------------------|");
+            //fileService.ReturnTotalAmountsAndTaxes();
+            Console.WriteLine();
+            Console.WriteLine("|--------------------WriteTotalAmountsAndTaxesToCsvFile();--------------------|");
+            fileService.WriteTotalAmountsAndTaxesToCsvFile();
+            Console.WriteLine();
+            Console.WriteLine("||--------2st PART--------||");
+            Console.WriteLine();
+            Console.WriteLine("|--------------------ReturnByEmployeeAndCompensationType();--------------------|");
             fileService.ReturnByEmployeeAndCompensationType();
             Console.WriteLine();
-            //fileService.WriteEmployeeAndCompensationToCsvFile();
+            Console.WriteLine("|--------------------WriteEmployeeAndCompensationToCsvFile();--------------------|");
+            fileService.WriteEmployeeAndCompensationToCsvFile();
+            Console.WriteLine();
             Console.WriteLine("---= PRESS ANY KEY =---");
             Console.ReadKey();
         }

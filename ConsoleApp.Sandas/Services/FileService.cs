@@ -14,7 +14,7 @@ namespace ConsoleApp.Sandas.Services
     class FileService : IFileService
     {
         readonly string filePath = $"C:{Path.DirectorySeparatorChar}SandasTemp{Path.DirectorySeparatorChar}duomenys.csv";
-        string totalAmountsFilePath = $"C:{Path.DirectorySeparatorChar}SandasTemp{Path.DirectorySeparatorChar}totalAmounts.csv";
+        string totalAmountsAndTaxesFilePath = $"C:{Path.DirectorySeparatorChar}SandasTemp{Path.DirectorySeparatorChar}totalAmounts.csv";
         string employeeAndCompensationTypeFilePath = $"C:{Path.DirectorySeparatorChar}SandasTemp{Path.DirectorySeparatorChar}employeeAndCompensationType.csv";
 
         public List<Employee> ReadCsvFile()
@@ -23,16 +23,8 @@ namespace ConsoleApp.Sandas.Services
                 .Skip(1) // skipping 1st (Column Headers) row
                 .Where(row => row.Length > 0)
                 .Select(Employee.ParseRow).ToList();
-        }
-        private void PrintAllCsv() //this method is only for testing...
-        {
-            var allEmployees = ReadCsvFile();
-            foreach (var employee in allEmployees)
-            {
-                Console.WriteLine($"{employee.FullName};{employee.CompensationType};{employee.Amount}");
-            }
-        }
-        public List<Employee> ReturnTotalAmounts()
+        }       
+        public List<Employee> ReturnTotalAmountsAndTaxes()
         {
             var employeesList = ReadCsvFile();
             var groupAmounts =
@@ -44,11 +36,15 @@ namespace ConsoleApp.Sandas.Services
                      TotalAmount = employeeGroup.Sum(x => x.Amount),
                      Taxes = (employeeGroup.Sum(x => x.Amount) * 1.4) - employeeGroup.Sum(x => x.Amount),
                  };
+            foreach (var item in groupAmounts)
+            {
+                Console.WriteLine($"{item.FullName};{item.TotalAmount},{item.Taxes}");
+            }
             return groupAmounts.ToList();
         }
-        public void WriteTotalAmountsToCsvFile()
+        public void WriteTotalAmountsAndTaxesToCsvFile()
         {
-            var csvText = ReturnTotalAmounts();
+            var csvText = ReturnTotalAmountsAndTaxes();
             var sb = new StringBuilder();
             sb.AppendLine("FullName;TotalAmount;Taxes");
             foreach (var item in csvText)
@@ -56,7 +52,7 @@ namespace ConsoleApp.Sandas.Services
                 sb.AppendLine(item.ToString());
             }
             Console.WriteLine(sb.ToString());
-            File.WriteAllText(totalAmountsFilePath, sb.ToString());
+            File.WriteAllText(totalAmountsAndTaxesFilePath, sb.ToString());
         }
         //--2nd part of an assignment
         public List<Employee> ReturnByEmployeeAndCompensationType()
@@ -78,15 +74,24 @@ namespace ConsoleApp.Sandas.Services
         }
         public void WriteEmployeeAndCompensationToCsvFile()
         {
-            var csvText = ReturnByEmployeeAndCompensationType();
+
             var sb = new StringBuilder();
             sb.AppendLine("FullName;CompensationType;TotalAmount");
-            foreach (var item in csvText)
+            var csvTextToFile = ReturnByEmployeeAndCompensationType();
+            foreach (var item in csvTextToFile)
             {
                 sb.AppendLine(item.ToString());
             }
             Console.WriteLine(sb.ToString());
             File.WriteAllText(employeeAndCompensationTypeFilePath, sb.ToString());
+        }
+        private void PrintAllCsv() //this method was ment only for testing...
+        {
+            var allEmployees = ReadCsvFile();
+            foreach (var employee in allEmployees)
+            {
+                Console.WriteLine($"{employee.FullName};{employee.CompensationType};{employee.Amount}");
+            }
         }
     }
 }
