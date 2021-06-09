@@ -4,7 +4,7 @@
 
 ![Screenshot](SandasPNG.png)
 
-Above data in console window succesfully printed to csv file [newData.csv] 
+Above data in console window succesfully printed to csv file [totalAmountsAndTaxes.csv] 
 
 ![Screenshot](newData.png)
 
